@@ -8,8 +8,8 @@ jobs:
   static:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
       - name: Compile Python sources
         run: uv run --no-sync python -m py_compile prepare.py train.py rigor.py trial_gate.py baseline_report.py test_trial_gate.py test_baseline_report.py
       - name: Run gate unit tests
