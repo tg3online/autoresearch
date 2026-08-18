@@ -59,6 +59,10 @@ Runtime artifacts are written under `.autoresearch/runs/` and remain local by de
 
 A first full-budget result is **provisional**. Before autonomous batches, establish at least three fixed-seed runs and report median plus spread. A candidate must:
 
+```bash
+uv run python baseline_report.py --output evidence/m4-mini-baseline.json
+```
+
 1. pass every resource and integrity gate;
 2. beat the baseline by more than the measured noise floor;
 3. reproduce on at least two seeds;

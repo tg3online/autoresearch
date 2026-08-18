@@ -91,7 +91,7 @@ def protected_files_clean() -> tuple[bool, list[str]]:
 
 
 def source_manifest() -> dict[str, Any]:
-    files = ("train.py", "prepare.py", "pyproject.toml", "uv.lock")
+    files = ("train.py", "prepare.py", "pyproject.toml", "uv.lock", "trial_gate.py")
     return {
         "git_commit": git_output("rev-parse", "HEAD"),
         "git_branch": git_output("branch", "--show-current"),
@@ -170,7 +170,7 @@ def run_trial(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
             "disk_free_mb": disk_free_mb,
         },
         "source": source_manifest(),
-        "command": ["uv", "run", "train.py"],
+        "command": [sys.executable, "train.py"],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 
@@ -186,7 +186,7 @@ def run_trial(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     start_monotonic = time.monotonic()
     with log_path.open("w") as log_handle:
         process = subprocess.Popen(
-            ["uv", "run", "train.py"],
+            [sys.executable, "train.py"],
             cwd=ROOT,
             env=env,
             stdout=log_handle,
