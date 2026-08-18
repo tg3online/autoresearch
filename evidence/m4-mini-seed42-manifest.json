@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "run_id": "20260818T031528Z-seed42",
+  "description": "provisional full-budget M4 mini baseline",
+  "status": "passed",
+  "started_at": "2026-08-18T03:15:28.118643+00:00",
+  "seed": 42,
+  "limits": {
+    "timeout_seconds": 480,
+    "time_budget_seconds": 300,
+    "eval_tokens": 262144,
+    "max_peak_memory_mb": 12288,
+    "min_available_memory_mb": 1024,
+    "min_free_disk_mb": 2048
+  },
+  "preflight": {
+    "available_memory_mb": 1555.625,
+    "disk_free_mb": 299255.3125
+  },
+  "source": {
+    "git_commit": "efa870b7f37feb3088087f7195bef4785937811b",
+    "git_branch": "m4-mini-16gb",
+    "files": {
+      "train.py": "a1a9beab3a766955d0150c010780a39b20431888e8a85dbdc3d380511558ef1a",
+      "prepare.py": "393bd353726a4a019b1118e8ad77ba6273cc18c11408688d0299a234fe1d822b",
+      "pyproject.toml": "37fdd978ccdcf6e83c6bb231dd78d082beed2d938af7c89e55d8c3dc469f7e6f",
+      "uv.lock": "d260945ae38ffc55443f7bdad5cf4c3b3b9b5313cf7cb36ca795ffe7422ca0ab",
+      "trial_gate.py": "a6eb95e29ecead32eb3e6419b198c3c34991881ddeb42e5f9ce444cfa0401abd"
+    },
+    "cache_bytes": 276176621
+  },
+  "command": [
+    ".venv/bin/python",
+    "train.py"
+  ],
+  "finished_at": "2026-08-18T03:20:31.840466+00:00",
+  "elapsed_seconds": 303.705,
+  "return_code": 0,
+  "failures": [],
+  "metrics": {
+    "val_bpb": 1.727192,
+    "training_seconds": 300.1,
+    "total_seconds": 303.1,
+    "peak_vram_mb": 659.8,
+    "total_tokens_M": 11.7,
+    "num_steps": 1434.0,
+    "num_params_M": 7.3,
+    "depth": 4.0
+  },
+  "log_sha256": "83f7329f07d9ed5d26e699aba84f0aac66e1314a60bacb30c3cf10c673cd25a8"
+}

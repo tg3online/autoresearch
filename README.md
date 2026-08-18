@@ -20,6 +20,13 @@ uv run python trial_gate.py --description "baseline seed 42" --seed 42
 
 The raw log and evidence manifest are written under `.autoresearch/runs/`.
 
+### TG M4 mini provisional baseline
+
+The first gated full-budget run completed on seed 42 with `val_bpb 1.727192`,
+303.1 seconds total runtime, 1,434 optimizer steps, and 659.8 MB reported peak
+MLX memory. This is provisional until two more seeds establish the noise floor.
+The reviewable summary and manifest are under [`evidence/`](evidence/).
+
 Apple Silicon (MLX) port of [Karpathy's autoresearch](https://github.com/karpathy/autoresearch).
 
 Full credit to [@karpathy](https://github.com/karpathy) for the core idea: fixed-time autonomous research loops controlled through `program.md`. This port keeps the same basic rules: one mutable `train.py`, one metric (`val_bpb`), a fixed 5-minute training budget, and keep-or-revert via git. It runs natively on Apple Silicon through [MLX](https://github.com/ml-explore/mlx), so there is no PyTorch or CUDA dependency.

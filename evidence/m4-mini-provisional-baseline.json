@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "sample_count": 1,
+  "seeds": [
+    42
+  ],
+  "val_bpb": {
+    "median": 1.727192,
+    "min": 1.727192,
+    "max": 1.727192,
+    "population_stdev": 0.0
+  },
+  "peak_vram_mb": {
+    "median": 659.8,
+    "max": 659.8
+  },
+  "source_hashes": {
+    "train.py": "a1a9beab3a766955d0150c010780a39b20431888e8a85dbdc3d380511558ef1a",
+    "prepare.py": "393bd353726a4a019b1118e8ad77ba6273cc18c11408688d0299a234fe1d822b",
+    "uv.lock": "d260945ae38ffc55443f7bdad5cf4c3b3b9b5313cf7cb36ca795ffe7422ca0ab"
+  },
+  "manifests": [
+    "evidence/m4-mini-seed42-manifest.json"
+  ]
+}

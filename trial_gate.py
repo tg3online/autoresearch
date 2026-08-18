@@ -170,7 +170,7 @@ def run_trial(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
             "disk_free_mb": disk_free_mb,
         },
         "source": source_manifest(),
-        "command": [sys.executable, "train.py"],
+        "command": [os.path.relpath(sys.executable, ROOT), "train.py"],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 
