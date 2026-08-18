@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Compile Python sources
+        run: uv run --no-sync python -m py_compile prepare.py train.py rigor.py
+      - name: Verify result schema
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          expected = "commit\tval_bpb\tmemory_gb\tstatus\tdescription"
+          first = Path("results.tsv").read_text().splitlines()[0]
+          if first != expected:
+              raise SystemExit(f"bad results.tsv header: {first!r}")
+          PY

@@ -28,9 +28,9 @@ import tiktoken
 # Constants (fixed, do not modify)
 # ---------------------------------------------------------------------------
 
-MAX_SEQ_LEN = 2048
-TIME_BUDGET = 300
-EVAL_TOKENS = 3 * 524288
+MAX_SEQ_LEN = 512
+TIME_BUDGET = int(os.environ.get("AUTORESEARCH_TIME_BUDGET", "300"))
+EVAL_TOKENS = int(os.environ.get("AUTORESEARCH_EVAL_TOKENS", str(2**18)))
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -43,7 +43,7 @@ BASE_URL = "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resol
 MAX_SHARD = 6542
 VAL_SHARD = MAX_SHARD
 VAL_FILENAME = f"shard_{VAL_SHARD:05d}.parquet"
-VOCAB_SIZE = 8192
+VOCAB_SIZE = 4096
 
 SPLIT_PATTERN = r"""'(?i:[sdmt]|ll|ve|re)|[^\r\n\p{L}\p{N}]?+\p{L}+|\p{N}{1,2}| ?[^\s\p{L}\p{N}]++[\r\n]*|\s*[\r\n]|\s+(?!\S)|\s+"""
 
@@ -364,10 +364,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--num-shards",
         type=int,
-        default=10,
+        default=2,
         help="Number of training shards to download (-1 = all). Val shard is always pinned.",
     )
-    parser.add_argument("--download-workers", type=int, default=8, help="Number of parallel download workers")
+    parser.add_argument("--download-workers", type=int, default=2, help="Number of parallel download workers")
     args = parser.parse_args()
 
     num_shards = MAX_SHARD if args.num_shards == -1 else args.num_shards

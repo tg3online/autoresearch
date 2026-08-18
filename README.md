@@ -1,5 +1,12 @@
 # autoresearch-mlx
 
+> **TG M4 mini branch:** This branch is the 16 GB Apple Silicon runtime for
+> `tg3online/autoresearch`. It uses MLX, a 512-token context, smaller train/eval
+> batches, a 4K tokenizer, a 12 GB experiment ceiling, and bounded research
+> sessions. GitHub stores code and experiment history; the Mac mini runs the
+> training. Standard GitHub-hosted Actions only validate the code because they
+> do not provide this machine's MLX runtime or comparable accelerator.
+
 Apple Silicon (MLX) port of [Karpathy's autoresearch](https://github.com/karpathy/autoresearch).
 
 Full credit to [@karpathy](https://github.com/karpathy) for the core idea: fixed-time autonomous research loops controlled through `program.md`. This port keeps the same basic rules: one mutable `train.py`, one metric (`val_bpb`), a fixed 5-minute training budget, and keep-or-revert via git. It runs natively on Apple Silicon through [MLX](https://github.com/ml-explore/mlx), so there is no PyTorch or CUDA dependency.
