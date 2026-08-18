@@ -733,7 +733,7 @@ def git(cwd: Path, *args: str, timeout: float = 30.0) -> str:
         raise CoordinatorError(f"git {' '.join(args)} failed: {exc}") from exc
     if completed.returncode != 0:
         raise CoordinatorError(f"git {' '.join(args)} failed: {completed.stderr.strip()[:300]}")
-    return completed.stdout.strip()
+    return completed.stdout.rstrip()
 
 
 def require_clean_worktree(root: Path) -> None:

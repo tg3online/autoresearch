@@ -438,6 +438,14 @@ class GitGuardTests(unittest.TestCase):
             with self.assertRaises(rt.CoordinatorError):
                 rt.require_clean_worktree(rt.ROOT)
 
+    def test_git_preserves_porcelain_leading_status_column(self):
+        with mock.patch.object(
+            rt.subprocess,
+            "run",
+            return_value=completed(stdout=" M train.py\n"),
+        ):
+            self.assertEqual(rt.git(Path("/tmp"), "status", "--porcelain"), " M train.py")
+
     def test_naming_is_deterministic(self):
         stamp = dt.datetime(2026, 8, 17, 12, 30, 0, tzinfo=dt.timezone.utc)
         run_id = rt.run_id_for(stamp, "DEPTH")
