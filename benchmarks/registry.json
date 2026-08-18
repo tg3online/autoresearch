@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "default_status": "design_only",
+    "max_concurrent_local_jobs": 1,
+    "production_auto_promotion": false,
+    "publishing_authority": false,
+    "capital_authority": false
+  },
+  "targets": [
+    {
+      "id": "mlx_m4_mini_training",
+      "status": "supervised",
+      "workspace": ".",
+      "mutable_artifacts": ["train.py"],
+      "protected_artifacts": ["prepare.py", "pyproject.toml", "uv.lock"],
+      "primary_metric": "val_bpb",
+      "direction": "minimize",
+      "evaluator": "trial_gate.py",
+      "promotion_requires_review": true
+    },
+    {
+      "id": "hermes_offline_task_routing",
+      "status": "design_only",
+      "primary_metric": "verified_task_success_rate",
+      "direction": "maximize",
+      "required_secondary_metrics": ["latency_seconds", "tool_call_count", "correction_rate"],
+      "authority": "offline_fixtures_only"
+    },
+    {
+      "id": "agon_judge_calibration",
+      "status": "design_only",
+      "primary_metric": "blind_human_agreement_rate",
+      "direction": "maximize",
+      "required_secondary_metrics": ["citation_validity_rate", "adversarial_flip_rate", "latency_seconds"],
+      "authority": "offline_fixtures_only"
+    },
+    {
+      "id": "distro_draft_quality",
+      "status": "design_only",
+      "primary_metric": "approval_rate",
+      "direction": "maximize",
+      "required_secondary_metrics": ["citation_coverage", "factual_error_rate", "human_edit_distance"],
+      "authority": "draft_only_no_publish"
+    },
+    {
+      "id": "solanatrader_shadow_recall",
+      "status": "design_only",
+      "primary_metric": "missed_runner_recall",
+      "direction": "maximize",
+      "required_secondary_metrics": ["false_positive_rate", "source_health_pass_rate"],
+      "authority": "historical_and_shadow_only_no_capital"
+    }
+  ]
+}

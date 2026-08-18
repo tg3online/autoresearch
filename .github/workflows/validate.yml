@@ -11,7 +11,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - name: Compile Python sources
-        run: uv run --no-sync python -m py_compile prepare.py train.py rigor.py
+        run: uv run --no-sync python -m py_compile prepare.py train.py rigor.py trial_gate.py test_trial_gate.py
+      - name: Run gate unit tests
+        run: uv run --no-sync python -m unittest -v test_trial_gate.py
       - name: Verify result schema
         run: |
           python - <<'PY'

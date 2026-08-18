@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 *.log
 run.log
+.autoresearch/
 surfaces.txt
 surface-verify-prompt.md
 build-2-closeout.md

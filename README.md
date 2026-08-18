@@ -6,6 +6,19 @@
 > sessions. GitHub stores code and experiment history; the Mac mini runs the
 > training. Standard GitHub-hosted Actions only validate the code because they
 > do not provide this machine's MLX runtime or comparable accelerator.
+>
+> Use `trial_gate.py` for resource-gated runs and read
+> [`SYSTEM_AUTORESEARCH.md`](SYSTEM_AUTORESEARCH.md) for the measured
+> keep/revert protocol that will later support Hermes, AGON, Distro, and other
+> offline benchmarks.
+
+### Safe local trial
+
+```bash
+uv run python trial_gate.py --description "baseline seed 42" --seed 42
+```
+
+The raw log and evidence manifest are written under `.autoresearch/runs/`.
 
 Apple Silicon (MLX) port of [Karpathy's autoresearch](https://github.com/karpathy/autoresearch).
 

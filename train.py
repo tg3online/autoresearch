@@ -397,7 +397,9 @@ def get_lr_multiplier(progress):
 
 
 t_start = time.time()
-mx.random.seed(42)
+RESEARCH_SEED = int(os.environ.get("AUTORESEARCH_SEED", "42"))
+mx.random.seed(RESEARCH_SEED)
+print(f"Research seed: {RESEARCH_SEED}")
 
 tokenizer = Tokenizer.from_directory()
 vocab_size = tokenizer.get_vocab_size()
