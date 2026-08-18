@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "not_promoted_pending_noise_floor",
+  "run_id": "20260818T044329Z-total_batch_size",
+  "models": {
+    "proposer": "unsloth/Qwen3.5-9B-GGUF:Q4_K_M",
+    "reviewer": "sonnet"
+  },
+  "proposal": {
+    "parameter": "TOTAL_BATCH_SIZE",
+    "value": 16384,
+    "current": 8192,
+    "rationale": "Increasing the batch size improves gradient estimation stability to reduce val_bpb while remaining within the 16 GB memory limit and satisfying the divisibility constraint.",
+    "derived": {
+      "model_dim": 256,
+      "n_head": 2,
+      "grad_accum_steps": 8,
+      "params_m": 7.34,
+      "estimated_peak_mb": 635.4
+    }
+  },
+  "review": {
+    "decision": "approve",
+    "rationale": "Single-variable change within bounds; divisibility and memory already validated (635MB vs 12288MB ceiling), ample headroom. Doubling batch size with matching grad_accum is a standard, interpretable ablation for gradient-noise/val_bpb effects at fixed time budget, with no other parameters altered.",
+    "adjusted": false,
+    "parameter": "TOTAL_BATCH_SIZE",
+    "value": 16384
+  },
+  "change": {
+    "parameter": "TOTAL_BATCH_SIZE",
+    "from": 8192,
+    "to": 16384
+  },
+  "baseline": {
+    "median": 1.727192,
+    "spread": 0.0,
+    "samples": 1,
+    "status": "provisional"
+  },
+  "trial": {
+    "status": "passed",
+    "failures": [],
+    "metrics": {
+      "val_bpb": 1.733306,
+      "training_seconds": 300.1,
+      "total_seconds": 303.0,
+      "peak_vram_mb": 685.8,
+      "total_tokens_M": 12.2,
+      "num_steps": 745.0,
+      "num_params_M": 7.3,
+      "depth": 4.0
+    },
+    "val_bpb_delta_vs_provisional_baseline": 0.006114,
+    "manifest_sha256": "7f552d81103acc69ee9077878e7205e18432c834e3fa9a2c9be429248489e8a1",
+    "log_sha256": "6629b2b0eb54bb19d4cb469ca3ca9e2badf776b06cbb05f701726657b8ab7cf0",
+    "source_files": {
+      "train.py": "a73ee861793807520062e875eac77a432789396c0ba96057de6f82934e849770",
+      "prepare.py": "393bd353726a4a019b1118e8ad77ba6273cc18c11408688d0299a234fe1d822b",
+      "pyproject.toml": "37fdd978ccdcf6e83c6bb231dd78d082beed2d938af7c89e55d8c3dc469f7e6f",
+      "uv.lock": "d260945ae38ffc55443f7bdad5cf4c3b3b9b5313cf7cb36ca795ffe7422ca0ab",
+      "trial_gate.py": "f180e380c7f6bb09a006fe7563099b4522fb935993631b1c70e6a01f2b183d7c"
+    }
+  },
+  "worktree": {
+    "branch": "autoresearch/20260818T044329Z-total_batch_size",
+    "base_commit": "c8810e09a6eb0f96f863e86df5ca9f87aeeead00",
+    "train_py_sha256": "a73ee861793807520062e875eac77a432789396c0ba96057de6f82934e849770",
+    "changed_files": [
+      "train.py"
+    ]
+  },
+  "decision": "Do not promote. Preserve the isolated worktree until baseline variance is established or TG approves cleanup."
+}
